@@ -10,19 +10,9 @@
 import Foundation
 
 struct UpcomingDisplaySection : Equatable {
-    let name : String = ""
-    let imageName : String = ""
-    var items : UpcomingDisplayItem[] = []
-    
-    init(name: String, imageName: String, items: UpcomingDisplayItem[]?) {
-        self.name = name
-        self.imageName = imageName
-        
-        if items {
-            self.items = items!
-            self.items.unshare()
-        }
-    }
+    let name : String
+    let imageName : String
+    var items : [UpcomingDisplayItem] = []
 }
 
 func == (leftSide: UpcomingDisplaySection, rightSide: UpcomingDisplaySection) -> Bool {

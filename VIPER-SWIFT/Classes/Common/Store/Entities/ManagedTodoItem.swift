@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 class ManagedTodoItem : NSManagedObject {
-    @NSManaged var name : NSString
+    @NSManaged var name : String
     @NSManaged var date : NSDate
 }

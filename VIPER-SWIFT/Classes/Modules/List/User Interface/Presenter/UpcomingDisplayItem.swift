@@ -8,29 +8,23 @@
 
 import Foundation
 
-struct UpcomingDisplayItem : Equatable, Printable {
-    let title : String = ""
-    let dueDate : String = ""
-    
-    var description : String { get {
-        return "\(title) -- \(dueDate)"
-    }}
-    
-    init(title: String, dueDate: String) {
-        self.title = title
-        self.dueDate = dueDate
-    }
+struct UpcomingDisplayItem : Equatable {
+    let title : String
+    let dueDate : String
 }
 
 func == (leftSide: UpcomingDisplayItem, rightSide: UpcomingDisplayItem) -> Bool {
-    var hasEqualSections = false
-    hasEqualSections = rightSide.title == leftSide.title
-    
-    if hasEqualSections == false {
+    if rightSide.title != leftSide.title {
         return false
     }
     
-    hasEqualSections = rightSide.dueDate == rightSide.dueDate
-    
-    return hasEqualSections
+    return rightSide.dueDate == rightSide.dueDate
+}
+
+extension UpcomingDisplayItem: CustomStringConvertible {
+
+    var description : String {
+        return "\(title) -- \(dueDate)"
+    }
+
 }

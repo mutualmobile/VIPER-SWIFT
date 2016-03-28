@@ -31,17 +31,13 @@ class ListInteractor : NSObject, ListInteractorInput {
         })
     }
     
-    func upcomingItemsFromToDoItems(todoItems: TodoItem[]) -> UpcomingItem[] {
+    func upcomingItemsFromToDoItems(todoItems: [TodoItem]) -> [UpcomingItem] {
         let calendar = NSCalendar.autoupdatingCurrentCalendar()
         
-        var upcomingItems : UpcomingItem[] = []
-        
-        for todoItem in todoItems {
-            var dateRelation = calendar.nearTermRelationForDate(todoItem.dueDate, relativeToToday: clock.today())
-            let upcomingItem = UpcomingItem(title: todoItem.name, dueDate: todoItem.dueDate, dateRelation: dateRelation)
-            upcomingItems.insert(upcomingItem, atIndex: upcomingItems.endIndex)
+        let upcomingItems: [UpcomingItem] = todoItems.map() { todoItem in
+            let dateRelation = calendar.nearTermRelationForDate(todoItem.dueDate, relativeToToday: clock.today())
+            return UpcomingItem(title: todoItem.name, dueDate: todoItem.dueDate, dateRelation: dateRelation)
         }
-        
         return upcomingItems
     }
 }

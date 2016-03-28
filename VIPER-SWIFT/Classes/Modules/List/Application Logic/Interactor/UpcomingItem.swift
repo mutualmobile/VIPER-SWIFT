@@ -9,11 +9,11 @@
 import Foundation
 
 struct UpcomingItem : Equatable {
-    let title : String = ""
-    let dueDate : NSDate = NSDate()
-    let dateRelation : NearTermDateRelation = NearTermDateRelation.OutOfRange
+    let title : String
+    let dueDate : NSDate
+    let dateRelation : NearTermDateRelation
     
-    init(title: String, dueDate: NSDate, dateRelation: NearTermDateRelation) {
+    init(title: String, dueDate: NSDate = NSDate(), dateRelation: NearTermDateRelation = NearTermDateRelation.OutOfRange) {
         self.title = title
         self.dueDate = dueDate
         self.dateRelation = dateRelation
