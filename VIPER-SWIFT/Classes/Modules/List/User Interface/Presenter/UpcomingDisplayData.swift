@@ -9,12 +9,7 @@
 import Foundation
 
 struct UpcomingDisplayData : Equatable {
-    let sections : UpcomingDisplaySection[] = []
-    
-    init(sections: UpcomingDisplaySection[]) {
-        self.sections = sections
-        self.sections.unshare()
-    }
+    let sections : [UpcomingDisplaySection]
 }
 
 func == (leftSide: UpcomingDisplayData, rightSide: UpcomingDisplayData) -> Bool {

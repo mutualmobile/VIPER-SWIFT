@@ -11,7 +11,7 @@ import Foundation
 class AddInteractor : NSObject {
     var addDataManager : AddDataManager?
     
-    func saveNewEntryWithName(name: NSString, dueDate: NSDate) {
+    func saveNewEntryWithName(name: String, dueDate: NSDate) {
         let newEntry = TodoItem(dueDate: dueDate, name: name)
         addDataManager?.addNewEntry(newEntry)
     }

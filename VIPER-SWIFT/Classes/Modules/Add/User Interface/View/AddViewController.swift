@@ -12,14 +12,16 @@ import UIKit
 class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface {
     var eventHandler : AddModuleInterface?
 
-    @IBOutlet var nameTextField : UITextField
-    @IBOutlet var datePicker : UIDatePicker?
-    
+    @IBOutlet var nameTextField : UITextField!
+    @IBOutlet var datePicker : UIDatePicker!
+
     var minimumDate : NSDate = NSDate()
     var transitioningBackgroundView : UIView = UIView()
     
     @IBAction func save(sender: AnyObject) {
-        eventHandler?.saveAddActionWithName(nameTextField.text, dueDate: datePicker!.date)
+        if let eventHandler = eventHandler, text = nameTextField.text {
+            eventHandler.saveAddActionWithName(text, dueDate: datePicker.date)
+        }
     }
     
     @IBAction func cancel(sender: AnyObject) {
@@ -30,8 +32,8 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        var gestureRecognizer = UITapGestureRecognizer()
-        gestureRecognizer.addTarget(self, action: Selector("dismiss"))
+        let gestureRecognizer = UITapGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(AddViewController.dismiss))
         
         transitioningBackgroundView.userInteractionEnabled = true
         
@@ -52,7 +54,7 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
         eventHandler?.cancelAddAction()
     }
     
-    func setEntryName(name: NSString) {
+    func setEntryName(name: String) {
         nameTextField.text = name
     }
     
@@ -70,7 +72,7 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return true

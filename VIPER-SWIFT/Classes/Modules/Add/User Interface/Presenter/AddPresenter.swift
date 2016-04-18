@@ -18,7 +18,7 @@ class AddPresenter : NSObject, AddModuleInterface {
         addModuleDelegate?.addModuleDidCancelAddAction()
     }
     
-    func saveAddActionWithName(name: NSString, dueDate: NSDate) {
+    func saveAddActionWithName(name: String, dueDate: NSDate) {
         addInteractor?.saveNewEntryWithName(name, dueDate: dueDate);
         addWireframe?.dismissAddInterface()
         addModuleDelegate?.addModuleDidSaveAddAction()
