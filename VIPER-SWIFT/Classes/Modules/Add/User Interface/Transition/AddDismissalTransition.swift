@@ -10,18 +10,18 @@ import Foundation
 import UIKit
 
 class AddDismissalTransition : NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.72
     }
 
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as! AddViewController
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! AddViewController
         
-        let finalCenter = CGPointMake(160.0, (fromVC.view.bounds.size.height / 2) - 1000.0)
+        let finalCenter = CGPoint(x: 160.0, y: (fromVC.view.bounds.size.height / 2) - 1000.0)
         
-        let options = UIViewAnimationOptions.CurveEaseIn
+        let options = UIViewAnimationOptions.curveEaseIn
         
-        UIView.animateWithDuration(self.transitionDuration(transitionContext),
+        UIView.animate(withDuration: self.transitionDuration(using: transitionContext),
             delay: 0.0,
             usingSpringWithDamping: 0.64,
             initialSpringVelocity: 0.22,

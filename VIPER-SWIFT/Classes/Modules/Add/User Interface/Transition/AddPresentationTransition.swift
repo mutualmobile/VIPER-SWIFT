@@ -10,32 +10,32 @@ import Foundation
 import UIKit
 
 class AddPresentationTransition: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.72
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as! AddViewController
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! AddViewController
         
-        toVC.transitioningBackgroundView.backgroundColor = UIColor.darkGrayColor()
+        toVC.transitioningBackgroundView.backgroundColor = UIColor.darkGray
         toVC.transitioningBackgroundView.alpha = 0.0
-        toVC.transitioningBackgroundView.frame = UIScreen.mainScreen().bounds
+        toVC.transitioningBackgroundView.frame = UIScreen.main.bounds
         
-        if let containerView = transitionContext.containerView() {
-            containerView.addSubview(toVC.transitioningBackgroundView)
-            containerView.addSubview(toVC.view)
-        }
+        let containerView = transitionContext.containerView
         
-        let toViewFrame = CGRectMake(0, 0, 260, 300)
+        containerView.addSubview(toVC.transitioningBackgroundView)
+        containerView.addSubview(toVC.view)
+        
+        let toViewFrame = CGRect(x: 0, y: 0, width: 260, height: 300)
         toVC.view.frame = toViewFrame
 
         let finalCenter = CGPoint(x: fromVC.view.bounds.size.width / 2, y: 20 + toViewFrame.size.height / 2)
         toVC.view.center = CGPoint(x: finalCenter.x, y: finalCenter.y - 1000)
         
-        let options = UIViewAnimationOptions.CurveEaseIn
+        let options = UIViewAnimationOptions.curveEaseIn
         
-        UIView.animateWithDuration(self.transitionDuration(transitionContext),
+        UIView.animate(withDuration: self.transitionDuration(using: transitionContext),
             delay: 0.0,
             usingSpringWithDamping: 0.64,
             initialSpringVelocity: 0.22,

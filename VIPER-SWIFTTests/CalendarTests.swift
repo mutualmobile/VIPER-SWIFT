@@ -9,12 +9,12 @@
 import XCTest
 
 class CalendarTests: XCTestCase {
-    var calendar: NSCalendar!
+    var calendar: Calendar!
 
     override func setUp() {
         super.setUp()
         
-        calendar = NSCalendar.gregorianCalendar()
+        calendar = Calendar.gregorianCalendar()
     }
     
     func testEarlyYearMonthDayIsBeforeLaterYearMonthDay() {

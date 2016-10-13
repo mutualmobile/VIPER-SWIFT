@@ -8,129 +8,130 @@
 
 import Foundation
 
-extension NSCalendar {
-    class func gregorianCalendar() -> NSCalendar {
-        return NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+extension Calendar {
+    static func gregorianCalendar() -> Calendar {
+        return Calendar(identifier: Calendar.Identifier.gregorian)
     }
     
-    func dateWithYear(year: Int, month: Int, day: Int) -> NSDate {
-        let components = NSDateComponents()
+    func dateWithYear(_ year: Int, month: Int, day: Int) -> Date {
+        var components = DateComponents()
         components.year = year
         components.month = month
         components.day = day
         components.hour = 12
-        return dateFromComponents(components)!
+        return date(from: components)!
     }
     
-    func dateForTomorrowRelativeToToday(today: NSDate) -> NSDate {
-        let tomorrowComponents = NSDateComponents()
+    func dateForTomorrowRelativeToToday(_ today: Date) -> Date {
+        var tomorrowComponents = DateComponents()
         tomorrowComponents.day = 1
-        return dateByAddingComponents(tomorrowComponents, toDate: today, options: [])!
+        return date(byAdding: tomorrowComponents, to: today, wrappingComponents: false)!
+
     }
     
-    func dateForEndOfWeekWithDate(date: NSDate) -> NSDate {
+    func dateForEndOfWeekWithDate(_ date: Date) -> Date {
         let daysRemainingThisWeek = daysRemainingInWeekWithDate(date)
-        let remainingDaysComponent = NSDateComponents()
+        var remainingDaysComponent = DateComponents()
         remainingDaysComponent.day = daysRemainingThisWeek
-        return dateByAddingComponents(remainingDaysComponent, toDate: date, options: [])!
+        return self.date(byAdding: remainingDaysComponent, to: date, wrappingComponents: false)!
     }
     
-    func dateForBeginningOfDay(date: NSDate) -> NSDate {
-        let newComponent = components(([.Year, .Month, .Day]), fromDate: date)
-        let newDate = dateFromComponents(newComponent)
+    func dateForBeginningOfDay(_ date: Date) -> Date {
+        let newComponent = dateComponents(([.year, .month, .day]), from: date)
+        let newDate = self.date(from: newComponent)
         return newDate!
     }
     
-    func dateForEndOfDay(date: NSDate) -> NSDate {
-        let components = NSDateComponents()
+    func dateForEndOfDay(_ date: Date) -> Date {
+        var components = DateComponents()
         components.day = 1
         let toDate = dateForBeginningOfDay(date)
-        let nextDay = dateByAddingComponents(components, toDate: toDate, options: [])!
+        let nextDay = self.date(byAdding: components, to: toDate, wrappingComponents: false)!
 //        let endDay = nextDay.dateByAddingTimeInterval(-1)
         return nextDay
     }
     
-    func daysRemainingInWeekWithDate(date: NSDate) -> Int {
-        let weekdayComponent = components(.Weekday, fromDate: date)
-        let daysRange = rangeOfUnit(.Weekday, inUnit: .WeekOfYear, forDate: date)
-        let daysPerWeek = daysRange.length
-        let daysRemaining = daysPerWeek - weekdayComponent.weekday
+    func daysRemainingInWeekWithDate(_ date: Date) -> Int {
+        let weekdayComponent = dateComponents([.weekday], from: date)
+        let daysRange = CountableRange(range(of: .weekday, in: .weekOfYear, for: date)!)
+        let daysPerWeek = daysRange.count
+        let daysRemaining = daysPerWeek - weekdayComponent.weekday!
         return daysRemaining
     }
     
-    func dateForEndOfFollowingWeekWithDate(date: NSDate) -> NSDate {
+    func dateForEndOfFollowingWeekWithDate(_ date: Date) -> Date {
         let endOfWeek = dateForEndOfWeekWithDate(date)
-        let nextWeekComponent = NSDateComponents()
+        var nextWeekComponent = DateComponents()
         nextWeekComponent.weekOfYear = 1
-        let followingWeekDate = dateByAddingComponents(nextWeekComponent, toDate: endOfWeek, options: [])
+        let followingWeekDate = self.date(byAdding: nextWeekComponent, to: endOfWeek, wrappingComponents: false)
         return followingWeekDate!
     }
     
-    func isDate(date: NSDate, beforeYearMonthDay: NSDate) -> Bool {
+    func isDate(_ date: Date, beforeYearMonthDay: Date) -> Bool {
         let comparison = compareYearMonthDay(date, toYearMonthDay: beforeYearMonthDay)
-        let result = comparison == NSComparisonResult.OrderedAscending
+        let result = comparison == ComparisonResult.orderedAscending
         return result
     }
     
-    func isDate(date: NSDate, equalToYearMonthDay: NSDate) -> Bool {
+    func isDate(_ date: Date, equalToYearMonthDay: Date) -> Bool {
         let comparison = compareYearMonthDay(date, toYearMonthDay: equalToYearMonthDay)
-        let result = comparison == NSComparisonResult.OrderedSame
+        let result = comparison == ComparisonResult.orderedSame
         return result
     }
     
-    func isDate(date: NSDate, duringSameWeekAsDate: NSDate) -> Bool {
-        let dateComponents = components(.WeekOfYear, fromDate: date)
-        let duringSameWeekComponents = components(.WeekOfYear, fromDate: duringSameWeekAsDate)
-        let result = dateComponents.weekOfYear == duringSameWeekComponents.weekOfYear
+    func isDate(_ date: Date, duringSameWeekAsDate: Date) -> Bool {
+        let dateC = dateComponents([.weekOfYear], from: date)
+        let duringSameWeekComponents = dateComponents([.weekOfYear], from: duringSameWeekAsDate)
+        let result = dateC.weekOfYear == duringSameWeekComponents.weekOfYear
         return result
     }
     
-    func isDate(date: NSDate, duringWeekAfterDate: NSDate) -> Bool {
+    func isDate(_ date: Date, duringWeekAfterDate: Date) -> Bool {
         let nextWeek = dateForEndOfFollowingWeekWithDate(duringWeekAfterDate)
-        let dateComponents = components(.WeekOfYear, fromDate: date)
-        let nextWeekComponents = components(.WeekOfYear, fromDate: nextWeek)
-        let result = dateComponents.weekOfYear == nextWeekComponents.weekOfYear
+        let dateC = dateComponents([.weekOfYear], from: date)
+        let nextWeekComponents = dateComponents([.weekOfYear], from: nextWeek)
+        let result = dateC.weekOfYear == nextWeekComponents.weekOfYear
         return result
     }
     
-    func compareYearMonthDay(date: NSDate, toYearMonthDay: NSDate) -> NSComparisonResult {
+    func compareYearMonthDay(_ date: Date, toYearMonthDay: Date) -> ComparisonResult {
         let dateComponents = yearMonthDayComponentsFromDate(date)
         let yearMonthDayComponents = yearMonthDayComponentsFromDate(toYearMonthDay)
         
-        var result = compareInteger(dateComponents.year, right: yearMonthDayComponents.year)
+        var result = compareInteger(dateComponents.year!, right: yearMonthDayComponents.year!)
         
-        if result == NSComparisonResult.OrderedSame {
-            result = compareInteger(dateComponents.month, right: yearMonthDayComponents.month)
+        if result == ComparisonResult.orderedSame {
+            result = compareInteger(dateComponents.month!, right: yearMonthDayComponents.month!)
             
-            if result == NSComparisonResult.OrderedSame {
-                result = compareInteger(dateComponents.day, right: yearMonthDayComponents.day)
+            if result == ComparisonResult.orderedSame {
+                result = compareInteger(dateComponents.day!, right: yearMonthDayComponents.day!)
             }
         }
         
         return result
     }
     
-    func yearMonthDayComponentsFromDate(date: NSDate) -> NSDateComponents {
-        let newComponents = components(([.Year, .Month, .Day]), fromDate: date)
+    func yearMonthDayComponentsFromDate(_ date: Date) -> DateComponents {
+        let newComponents = dateComponents(([.year, .month, .day]), from: date)
         return newComponents
     }
     
-    func compareInteger(left: Int, right: Int) -> NSComparisonResult {
-        var result = NSComparisonResult.OrderedDescending
+    func compareInteger(_ left: Int, right: Int) -> ComparisonResult {
+        var result = ComparisonResult.orderedDescending
         
         if left == right {
-            result = NSComparisonResult.OrderedSame
+            result = ComparisonResult.orderedSame
         } else if left < right {
-            result = NSComparisonResult.OrderedAscending
+            result = ComparisonResult.orderedAscending
         } else {
-            result = NSComparisonResult.OrderedDescending
+            result = ComparisonResult.orderedDescending
         }
         
         return result
     }
     
-    func nearTermRelationForDate(date: NSDate, relativeToToday: NSDate) -> NearTermDateRelation {
-        var relation = NearTermDateRelation.OutOfRange
+    func nearTermRelationForDate(_ date: Date, relativeToToday: Date) -> NearTermDateRelation {
+        var relation = NearTermDateRelation.outOfRange
         
         let dateForTomorrow = dateForTomorrowRelativeToToday(relativeToToday)
         
@@ -141,21 +142,21 @@ extension NSCalendar {
         let isDateDuringSameWeekAfterDate = isDate(date, duringWeekAfterDate: relativeToToday)
         
         if isDateBeforeYearMonthDay {
-            relation = NearTermDateRelation.OutOfRange
+            relation = NearTermDateRelation.outOfRange
         } else if isDateEqualToYearMonthDay {
-            relation = NearTermDateRelation.Today
+            relation = NearTermDateRelation.today
         } else if isDateEqualToYearMonthDayRelativeToTomorrow {
             let isRelativeDateDuringSameWeek = isDate(relativeToToday, duringSameWeekAsDate: date)
 
             if isRelativeDateDuringSameWeek {
-                relation = NearTermDateRelation.Tomorrow
+                relation = NearTermDateRelation.tomorrow
             } else {
-                relation = NearTermDateRelation.NextWeek
+                relation = NearTermDateRelation.nextWeek
             }
         } else if isDateDuringSameWeekAsDate {
-            relation = NearTermDateRelation.LaterThisWeek
+            relation = NearTermDateRelation.laterThisWeek
         } else if isDateDuringSameWeekAfterDate {
-            relation = NearTermDateRelation.NextWeek
+            relation = NearTermDateRelation.nextWeek
         }
         
         return relation

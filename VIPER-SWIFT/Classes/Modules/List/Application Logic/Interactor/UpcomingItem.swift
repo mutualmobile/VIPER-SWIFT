@@ -10,10 +10,10 @@ import Foundation
 
 struct UpcomingItem : Equatable {
     let title : String
-    let dueDate : NSDate
+    let dueDate : Date
     let dateRelation : NearTermDateRelation
     
-    init(title: String, dueDate: NSDate = NSDate(), dateRelation: NearTermDateRelation = NearTermDateRelation.OutOfRange) {
+    init(title: String, dueDate: Date = Date(), dateRelation: NearTermDateRelation = NearTermDateRelation.outOfRange) {
         self.title = title
         self.dueDate = dueDate
         self.dateRelation = dateRelation

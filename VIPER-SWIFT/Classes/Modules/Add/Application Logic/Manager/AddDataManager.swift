@@ -11,7 +11,7 @@ import Foundation
 class AddDataManager : NSObject {
     var dataStore : CoreDataStore!
     
-    func addNewEntry(entry: TodoItem) {
+    func addNewEntry(_ entry: TodoItem) {
         let newEntry = dataStore.newTodoItem()
         newEntry.name = entry.name
         newEntry.date = entry.dueDate;

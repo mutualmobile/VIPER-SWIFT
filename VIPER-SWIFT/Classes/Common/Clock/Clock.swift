@@ -9,5 +9,5 @@
 import Foundation
 
 protocol Clock {
-    func today() -> NSDate
+    func today() -> Date
 }

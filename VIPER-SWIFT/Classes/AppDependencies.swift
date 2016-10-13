@@ -16,7 +16,7 @@ class AppDependencies {
         configureDependencies()
     }
     
-    func installRootViewControllerIntoWindow(window: UIWindow) {
+    func installRootViewControllerIntoWindow(_ window: UIWindow) {
         listWireframe.presentListInterfaceFromWindow(window)
     }
     

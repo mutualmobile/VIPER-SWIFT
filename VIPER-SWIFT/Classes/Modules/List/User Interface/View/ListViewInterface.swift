@@ -10,7 +10,7 @@ import Foundation
 
 protocol ListViewInterface {
     func showNoContentMessage()
-    func showUpcomingDisplayData(data: UpcomingDisplayData)
+    func showUpcomingDisplayData(_ data: UpcomingDisplayData)
     func reloadEntries ()
 }
     

@@ -17,7 +17,7 @@ class ListWireframe : NSObject {
     var rootWireframe : RootWireframe?
     var listViewController : ListViewController?
     
-    func presentListInterfaceFromWindow(window: UIWindow) {
+    func presentListInterfaceFromWindow(_ window: UIWindow) {
         let viewController = listViewControllerFromStoryboard()
         viewController.eventHandler = listPresenter
         listViewController = viewController
@@ -31,12 +31,12 @@ class ListWireframe : NSObject {
     
     func listViewControllerFromStoryboard() -> ListViewController {
         let storyboard = mainStoryboard()
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(ListViewControllerIdentifier) as! ListViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: ListViewControllerIdentifier) as! ListViewController
         return viewController
     }
     
     func mainStoryboard() -> UIStoryboard {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         return storyboard
     }
     
