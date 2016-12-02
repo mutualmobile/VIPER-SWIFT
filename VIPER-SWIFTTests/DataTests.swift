@@ -19,9 +19,9 @@ class DataTests: XCTestCase {
     }
     
     func testPerformance() {
-        self.measureBlock() {
-            let startDate = NSDate()
-            let endDate = NSDate(timeIntervalSinceReferenceDate: 0)
+        self.measure() {
+            let startDate = Date()
+            let endDate = Date(timeIntervalSinceReferenceDate: 0)
             self.dataManager.todoItemsBetweenStartDate(startDate, endDate: endDate, completion: { entries in
                 
             })

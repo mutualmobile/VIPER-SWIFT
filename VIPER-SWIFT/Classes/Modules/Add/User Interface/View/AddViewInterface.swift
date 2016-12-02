@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AddViewInterface {
-    func setEntryName(name: String)
-    func setEntryDueDate(date: NSDate)
-    func setMinimumDueDate(date: NSDate)
+    func setEntryName(_ name: String)
+    func setEntryDueDate(_ date: Date)
+    func setMinimumDueDate(_ date: Date)
 }

@@ -9,6 +9,6 @@
 import Foundation
 
 struct TodoItem {
-    let dueDate : NSDate
+    let dueDate : Date
     let name : String
 }

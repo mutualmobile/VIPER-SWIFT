@@ -9,9 +9,9 @@
 import Foundation
 
 enum NearTermDateRelation {
-    case OutOfRange,
-         Today,
-         Tomorrow,
-         LaterThisWeek,
-         NextWeek
+    case outOfRange,
+         today,
+         tomorrow,
+         laterThisWeek,
+         nextWeek
 }

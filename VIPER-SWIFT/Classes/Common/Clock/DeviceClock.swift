@@ -9,7 +9,7 @@
 import Foundation
 
 class DeviceClock : NSObject, Clock {
-    func today() -> NSDate {
-        return NSDate()
+    func today() -> Date {
+        return Date()
     }
 }
