@@ -373,7 +373,6 @@
 			children = (
 				261FA1A319414A720029F589 /* Interactor */,
 				261FA1A719414A720029F589 /* Manager */,
-				261FA1A919414A720029F589 /* Model */,
 			);
 			path = "Application Logic";
 			sourceTree = "<group>";
@@ -394,13 +393,6 @@
 				261FA1A819414A720029F589 /* ListDataManager.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		261FA1A919414A720029F589 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		261FA1AA19414A720029F589 /* Module Interface */ = {
