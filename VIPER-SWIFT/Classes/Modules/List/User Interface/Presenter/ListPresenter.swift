@@ -14,9 +14,7 @@ class ListPresenter : NSObject, ListInteractorOutput, ListModuleInterface, AddMo
     var listWireframe : ListWireframe?
     var userInterface : ListViewInterface?
     
-    func updateView() {
-        listInteractor?.findUpcomingItems()
-    }
+    // MARK: ListInteractorOutput
     
     func foundUpcomingItems(_ upcomingItems: [UpcomingItem]) {
         if upcomingItems.count == 0 {
@@ -37,9 +35,17 @@ class ListPresenter : NSObject, ListInteractorOutput, ListModuleInterface, AddMo
         return collection.collectedDisplayData()
     }
     
+    // MARK: ListModuleInterface
+    
     func addNewEntry() {
         listWireframe?.presentAddInterface()
     }
+    
+    func updateView() {
+        listInteractor?.findUpcomingItems()
+    }
+    
+    // MARK: AddModuleDelegate
     
     func addModuleDidCancelAddAction() {
         // No action necessary
