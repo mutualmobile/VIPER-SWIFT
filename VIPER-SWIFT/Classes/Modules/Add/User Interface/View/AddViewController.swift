@@ -19,8 +19,8 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
     var transitioningBackgroundView : UIView = UIView()
     
     @IBAction func save(_ sender: AnyObject) {
-        if let eventHandler = eventHandler, let text = nameTextField.text {
-            eventHandler.saveAddActionWithName(text, dueDate: datePicker.date)
+        if let text = nameTextField.text {
+            eventHandler?.saveAddActionWithName(text, dueDate: datePicker.date)
         }
     }
     
