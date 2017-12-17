@@ -43,6 +43,8 @@ class ListViewController : UITableViewController, ListViewInterface {
         eventHandler?.addNewEntry()
     }
     
+    // MARK: ListViewInterface
+    
     func showNoContentMessage() {
         view = noContentView
     }
@@ -57,6 +59,8 @@ class ListViewController : UITableViewController, ListViewInterface {
     func reloadEntries() {
         tableView.reloadData()
     }
+    
+    // MARK: UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return dataProperty?.sections.count ?? 0
