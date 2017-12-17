@@ -78,12 +78,7 @@ class UpcomingDisplayDataCollection {
     }
     
     func sortedNearTermDateRelations() -> [NearTermDateRelation] {
-        var array : [NearTermDateRelation] = []
-        array.insert(NearTermDateRelation.today, at: 0)
-        array.insert(NearTermDateRelation.tomorrow, at: 1)
-        array.insert(NearTermDateRelation.laterThisWeek, at: 2)
-        array.insert(NearTermDateRelation.nextWeek, at: 3)
-        return array
+        return [.today, .tomorrow, .laterThisWeek, .nextWeek]
     }
     
     func sectionTitleForDateRelation(_ dateRelation: NearTermDateRelation) -> String {
