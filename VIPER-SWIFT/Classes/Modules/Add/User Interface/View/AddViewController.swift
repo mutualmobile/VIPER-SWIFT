@@ -54,6 +54,8 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
         eventHandler?.cancelAddAction()
     }
     
+    // MARK: AddViewInterface
+    
     func setEntryName(_ name: String) {
         nameTextField.text = name
     }
@@ -71,6 +73,8 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
             realDatePicker.minimumDate = date
         }
     }
+    
+    // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
