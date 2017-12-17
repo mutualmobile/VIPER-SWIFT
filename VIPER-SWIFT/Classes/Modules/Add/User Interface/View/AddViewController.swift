@@ -32,10 +32,9 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let gestureRecognizer = UITapGestureRecognizer()
-        gestureRecognizer.addTarget(self, action: #selector(AddViewController.dismissFunc))
-        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddViewController.dismissFunc))
         transitioningBackgroundView.isUserInteractionEnabled = true
+        transitioningBackgroundView.addGestureRecognizer(gestureRecognizer)
         
         nameTextField.becomeFirstResponder()
         
