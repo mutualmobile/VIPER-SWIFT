@@ -9,14 +9,14 @@
 
 import Foundation
 
-struct UpcomingDisplaySection : Equatable {
+struct UpcomingDisplaySection {
     let name : String
     let imageName : String
     var items : [UpcomingDisplayItem] = []
 }
 
-func == (leftSide: UpcomingDisplaySection, rightSide: UpcomingDisplaySection) -> Bool {
-    var hasEqualSections = false
-    hasEqualSections = rightSide.items == leftSide.items
-    return hasEqualSections
+extension UpcomingDisplaySection : Equatable {
+    static func == (leftSide: UpcomingDisplaySection, rightSide: UpcomingDisplaySection) -> Bool {
+        return rightSide.items == leftSide.items
+    }
 }
