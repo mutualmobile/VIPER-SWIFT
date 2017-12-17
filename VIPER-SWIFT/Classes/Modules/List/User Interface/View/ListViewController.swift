@@ -39,7 +39,7 @@ class ListViewController : UITableViewController, ListViewInterface {
         navigationItem.rightBarButtonItem = addItem
     }
     
-    func didTapAddButton () {
+    @objc func didTapAddButton () {
         eventHandler?.addNewEntry()
     }
     

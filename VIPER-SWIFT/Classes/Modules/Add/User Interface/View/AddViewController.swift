@@ -50,7 +50,7 @@ class AddViewController: UIViewController, UITextFieldDelegate, AddViewInterface
         nameTextField.resignFirstResponder()
     }
     
-    func dismissFunc() {
+    @objc func dismissFunc() {
         eventHandler?.cancelAddAction()
     }
     
