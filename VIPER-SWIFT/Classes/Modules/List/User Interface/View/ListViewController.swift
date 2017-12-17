@@ -59,13 +59,7 @@ class ListViewController : UITableViewController, ListViewInterface {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        var numberOfSections = dataProperty?.sections.count
-        
-        if dataProperty?.sections.count == nil {
-            numberOfSections = 0
-        }
-        
-        return numberOfSections!
+        return dataProperty?.sections.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
