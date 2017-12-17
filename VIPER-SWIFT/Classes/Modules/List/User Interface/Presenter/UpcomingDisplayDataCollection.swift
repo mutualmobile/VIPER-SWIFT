@@ -45,11 +45,7 @@ class UpcomingDisplayDataCollection {
     }
     
     func formattedDay(_ date: Date, dateRelation: NearTermDateRelation) -> String {
-        if dateRelation == NearTermDateRelation.today {
-            return ""
-        }
-        
-        return dayFormatter.string(from: date)
+        return dateRelation == NearTermDateRelation.today ? "" : dayFormatter.string(from: date)
     }
     
     func collectedDisplayData() -> UpcomingDisplayData {
