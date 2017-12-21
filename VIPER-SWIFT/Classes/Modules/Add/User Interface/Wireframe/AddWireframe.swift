@@ -44,6 +44,8 @@ class AddWireframe : NSObject, UIViewControllerTransitioningDelegate {
         return storyboard
     }
     
+    // MARK: UIViewControllerTransitioningDelegate
+    
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return AddDismissalTransition()
     }

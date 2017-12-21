@@ -13,6 +13,12 @@ class AddPresenter : NSObject, AddModuleInterface {
     var addWireframe : AddWireframe?
     var addModuleDelegate : AddModuleDelegate?
     
+    func configureUserInterfaceForPresentation(_ addViewUserInterface: AddViewInterface) {
+        addViewUserInterface.setMinimumDueDate(Date())
+    }
+    
+    // MARK: AddModuleInterface
+    
     func cancelAddAction() {
         addWireframe?.dismissAddInterface()
         addModuleDelegate?.addModuleDidCancelAddAction()
@@ -22,9 +28,5 @@ class AddPresenter : NSObject, AddModuleInterface {
         addInteractor?.saveNewEntryWithName(name, dueDate: dueDate);
         addWireframe?.dismissAddInterface()
         addModuleDelegate?.addModuleDidSaveAddAction()
-    }
-    
-    func configureUserInterfaceForPresentation(_ addViewUserInterface: AddViewInterface) {
-        addViewUserInterface.setMinimumDueDate(Date())
     }
 }

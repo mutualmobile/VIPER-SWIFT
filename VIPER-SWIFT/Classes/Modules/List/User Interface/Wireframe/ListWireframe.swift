@@ -21,7 +21,7 @@ class ListWireframe : NSObject {
         let viewController = listViewControllerFromStoryboard()
         viewController.eventHandler = listPresenter
         listViewController = viewController
-        listPresenter!.userInterface = viewController
+        listPresenter?.userInterface = viewController
         rootWireframe?.showRootViewController(viewController, inWindow: window)
     }
     

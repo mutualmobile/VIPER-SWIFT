@@ -29,11 +29,8 @@ class ListDataManager : NSObject {
     }
     
     func todoItemsFromDataStoreEntries(_ entries: [ManagedTodoItem]) -> [TodoItem] {
-        var todoItems : [TodoItem] = []
-        
-        for managedTodoItem in entries {
-            let todoItem = TodoItem(dueDate: managedTodoItem.date, name: managedTodoItem.name as String)
-            todoItems.append(todoItem)
+        let todoItems : [TodoItem] = entries.map { entry in
+            TodoItem(dueDate: entry.date, name: entry.name as String)
         }
         
         return todoItems

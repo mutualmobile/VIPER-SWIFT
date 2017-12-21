@@ -45,11 +45,7 @@ class UpcomingDisplayDataCollection {
     }
     
     func formattedDay(_ date: Date, dateRelation: NearTermDateRelation) -> String {
-        if dateRelation == NearTermDateRelation.today {
-            return ""
-        }
-        
-        return dayFormatter.string(from: date)
+        return dateRelation == NearTermDateRelation.today ? "" : dayFormatter.string(from: date)
     }
     
     func collectedDisplayData() -> UpcomingDisplayData {
@@ -82,12 +78,7 @@ class UpcomingDisplayDataCollection {
     }
     
     func sortedNearTermDateRelations() -> [NearTermDateRelation] {
-        var array : [NearTermDateRelation] = []
-        array.insert(NearTermDateRelation.today, at: 0)
-        array.insert(NearTermDateRelation.tomorrow, at: 1)
-        array.insert(NearTermDateRelation.laterThisWeek, at: 2)
-        array.insert(NearTermDateRelation.nextWeek, at: 3)
-        return array
+        return [.today, .tomorrow, .laterThisWeek, .nextWeek]
     }
     
     func sectionTitleForDateRelation(_ dateRelation: NearTermDateRelation) -> String {

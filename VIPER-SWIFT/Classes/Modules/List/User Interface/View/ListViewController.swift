@@ -39,9 +39,11 @@ class ListViewController : UITableViewController, ListViewInterface {
         navigationItem.rightBarButtonItem = addItem
     }
     
-    func didTapAddButton () {
+    @objc func didTapAddButton () {
         eventHandler?.addNewEntry()
     }
+    
+    // MARK: ListViewInterface
     
     func showNoContentMessage() {
         view = noContentView
@@ -58,14 +60,10 @@ class ListViewController : UITableViewController, ListViewInterface {
         tableView.reloadData()
     }
     
+    // MARK: UITableViewDataSource
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        var numberOfSections = dataProperty?.sections.count
-        
-        if dataProperty?.sections.count == nil {
-            numberOfSections = 0
-        }
-        
-        return numberOfSections!
+        return dataProperty?.sections.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

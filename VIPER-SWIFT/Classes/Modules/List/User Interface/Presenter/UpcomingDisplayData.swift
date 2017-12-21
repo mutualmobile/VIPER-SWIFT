@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct UpcomingDisplayData : Equatable {
+struct UpcomingDisplayData {
     let sections : [UpcomingDisplaySection]
 }
 
-func == (leftSide: UpcomingDisplayData, rightSide: UpcomingDisplayData) -> Bool {
-    var hasEqualSections = false
-    hasEqualSections = rightSide.sections == leftSide.sections
-    return hasEqualSections
+extension UpcomingDisplayData : Equatable {
+    static func == (leftSide: UpcomingDisplayData, rightSide: UpcomingDisplayData) -> Bool {
+        return rightSide.sections == leftSide.sections
+    }
 }

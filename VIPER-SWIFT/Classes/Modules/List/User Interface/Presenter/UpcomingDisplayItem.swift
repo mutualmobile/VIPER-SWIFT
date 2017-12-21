@@ -8,23 +8,19 @@
 
 import Foundation
 
-struct UpcomingDisplayItem : Equatable {
+struct UpcomingDisplayItem {
     let title : String
     let dueDate : String
 }
 
-func == (leftSide: UpcomingDisplayItem, rightSide: UpcomingDisplayItem) -> Bool {
-    if rightSide.title != leftSide.title {
-        return false
+extension UpcomingDisplayItem : Equatable {
+    static func == (leftSide: UpcomingDisplayItem, rightSide: UpcomingDisplayItem) -> Bool {
+        return rightSide.title == leftSide.title && rightSide.dueDate == rightSide.dueDate
     }
-    
-    return rightSide.dueDate == rightSide.dueDate
 }
 
 extension UpcomingDisplayItem: CustomStringConvertible {
-
     var description : String {
         return "\(title) -- \(dueDate)"
     }
-
 }

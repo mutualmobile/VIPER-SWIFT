@@ -19,6 +19,8 @@ class ListInteractor : NSObject, ListInteractorInput {
         self.clock = clock
     }
     
+    // MARK: ListInteractorInput
+    
     func findUpcomingItems() {
         let today = clock.today()
         let endOfNextWeek = Calendar.current.dateForEndOfFollowingWeekWithDate(today)
